@@ -76,6 +76,8 @@ output "sas_url_query_string" {
 
 * `ip_address` - (Optional) Single IPv4 address or range (connected with a dash) of IPv4 addresses.
 
+* `access_policy_name` - (Optional) A unique value up to 64 characters in length that correlates to an access policy specified for the container, queue, or table.
+
 * `start` - The starting time and date of validity of this SAS. Must be a valid ISO-8601 format time/date string.
 
 * `expiry` - The expiration time and date of this SAS. Must be a valid ISO-8601 format time/date string.

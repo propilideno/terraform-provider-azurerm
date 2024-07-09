@@ -100,6 +100,11 @@ func dataSourceStorageAccountBlobContainerSharedAccessSignature() *pluginsdk.Res
 				},
 			},
 
+			"access_policy_identifier": {
+				Type:     pluginsdk.TypeString,
+				Optional: true,
+			},
+
 			"cache_control": {
 				Type:     pluginsdk.TypeString,
 				Optional: true,
@@ -142,6 +147,7 @@ func dataSourceStorageContainerSasRead(d *pluginsdk.ResourceData, _ interface{})
 	start := d.Get("start").(string)
 	expiry := d.Get("expiry").(string)
 	permissionsIface := d.Get("permissions").([]interface{})
+	signedIdentifier := d.Get("access_policy_identifier").(string)
 
 	// response headers
 	cacheControl := d.Get("cache_control").(string)
@@ -166,7 +172,6 @@ func dataSourceStorageContainerSasRead(d *pluginsdk.ResourceData, _ interface{})
 		signedProtocol = "https"
 	}
 	signedIp := ip
-	signedIdentifier := ""
 	signedSnapshotTime := ""
 
 	sasToken, err := storage.ComputeContainerSASToken(permissions, start, expiry, accountName, accountKey,
